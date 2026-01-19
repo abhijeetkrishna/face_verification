@@ -24,4 +24,4 @@ COPY model/ ./model/
 EXPOSE 9696
 
 # Run with gunicorn (same as before)
-ENTRYPOINT ["gunicorn", "--bind=0.0.0.0:5000", "predict:app"]
+ENTRYPOINT ["gunicorn", "--bind=0.0.0.0:9696", "predict:app"]

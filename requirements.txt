@@ -2,3 +2,4 @@ facenet-pytorch
 scikit-learn
 pandas
 matplotlib
+flask

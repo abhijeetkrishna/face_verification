@@ -30,10 +30,11 @@ print("Images:", images.shape)
 # TRANSFORMS
 # -------------------------------
 transform = transforms.Compose([
-    transforms.ToPILImage(),
+    transforms.ToPILImage(),               # auto-detect uint8
     transforms.Resize((160, 160)),
-    transforms.Grayscale(num_output_channels=3),  # FaceNet expects RGB
-    transforms.ToTensor(),
+    transforms.Grayscale(num_output_channels=3),
+    transforms.ToTensor(),                 # -> [0, 1]
+    transforms.Normalize(mean=[0.5]*3, std=[0.5]*3)
 ])
 
 # -------------------------------
@@ -48,7 +49,9 @@ embeddings = []
 
 with torch.no_grad():
     for img in tqdm(images):
-        img = transform(img.astype(np.uint8))
+
+        img = transform((img * 255).astype(np.uint8))
+
         img = img.unsqueeze(0).to(device)
 
         emb = model(img)

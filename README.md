@@ -14,7 +14,15 @@ In short, the goal is to do the following task
 ```
 Given (face_A, face_B) → same person or not
 ```
----
+
+## Environment setup
+
+```bash
+python -m venv faceEnv
+source faceEnv/bin/activate #Mac
+faceEnv\Scripts\activate #Windows
+pip install -r requirements.txt
+```
 
 ## Dataset
 
@@ -44,8 +52,6 @@ python scripts/download_data.py
 python scripts/generate_pairs.py
 ```
 
----
-
 ## Approach
 
 ### Embedding Extraction
@@ -61,32 +67,51 @@ To extract the embedding run the following commands :
 python scripts/extract_embeddings.py
 ```
 
-### Models
+### Binary classification on image pairs
+
+We generate image pairs. Image pairs can consist of images of the same person or different person. Featurs are engineered for each such pair. This constitutes the training data for the model. 
+
+## EDA
+
+- We explore the images in the LFW dataset. The images are grayscale and pixel values range from 0 to 1. 8bit RGB images are created to pass to FaceNet. 
+- We generate 16800 pairs of images. Half of the pairs contain images of the same person. The other half contain images of different people.
+- The embeddings are explored by computing the cosine similarity difference between images in each pair. 
+
+EDA can be found in `notebooks/01-eda.ipynb`
+
+## Models
 
 The embeddings are used to train two models:
 
 1. **Logistic Regression on Embedding Differences**
 2. **Support Vector Machine**
 
-The models are fine-tuned and both perform equally well.
+***Model Performance Summary***
+
+The models were **fine-tuned**, and performance metrics are reported below.
+
+| Model | Optimal C | Accuracy | F1 Score | ROC AUC |
+|------|-----------|----------|----------|---------|
+| Logistic Regression | 10 | 0.9833 | 0.9833 | 0.9979 |
+| SVM (RBF Kernel) | 10 | 0.9875 | 0.9875 | 0.9977 |
+
+***Final Training Script***
+
+A script is provided for reproducible training with the optimal parameters. To train, run the following commands :
+
+```
+python scripts/train.py 
+```
 
 ---
 
-## Evaluation
-
-Models are evaluated using:
-
-* Accuracy
-* ROC AUC
-* Confusion matrix
-
-Similarity score distributions for positive and negative pairs are analyzed as part of EDA.
-
----
-
-## Service
+## Model Deployment
 
 The trained verification model is exposed via a **Flask API**.
+
+```bash
+python scripts/predict.py
+```
 
 ### Endpoint
 
@@ -110,56 +135,6 @@ The trained verification model is exposed via a **Flask API**.
 }
 ```
 
----
-
-## Project Structure
-
-```
-.
-├── data/               # LFW data and processed embeddings
-├── models/             # Trained models and thresholds
-├── src/
-│   ├── process_dataset.py
-│   ├── extract_embeddings.py
-│   ├── train_models.py
-│   └── evaluate.py
-├── service/
-│   └── app.py          # Flask application
-├── Dockerfile
-├── requirements.txt
-└── README.md
-```
-
----
-
-## Running the Project
-
-### Environment setup
-
-```bash
-python -m venv faceEnv
-source faceEnv/bin/activate #Mac
-faceEnv\Scripts\activate #Windows
-pip install -r requirements.txt
-```
-
-### Training
-
-```bash
-python scripts/download_data.py
-python scripts/extract_embeddings.py
-python scripts/train_models.py
-python scripts/evaluate.py
-```
-
-### Run service
-
-```bash
-python service/app.py
-```
-
----
-
 ## Containerization
 
 Build and run with Docker:
@@ -168,8 +143,6 @@ Build and run with Docker:
 docker build -t face-verification .
 docker run -p 9696:9696 face-verification
 ```
-
----
 
 ## Future Work
 

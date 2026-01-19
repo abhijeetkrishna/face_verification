@@ -5,7 +5,7 @@
 Modern photo applications (e.g. Google Photos) automatically group images by person without requiring predefined identities.
 At the core of such systems is **face verification**: given two face images, decide whether they belong to the same person.
 
-This project implements a **face verification service** that can later be used as a plug-and-play module in a larger photo organization system. The service takes two face images as input and returns a similarity score and a binary decision (`same person` / `different person`).
+This project implements a **face verification service** that can later be used as a plug-and-play module in a larger photo organization system. The service takes two face images as input and performs a **binary classification** (`same person` / `different person`).
 
 The project focuses on **verification**, not closed-set face recognition, as verification is the fundamental building block for scalable, open-set photo libraries.
 
@@ -37,7 +37,7 @@ lfw_people = fetch_lfw_people(
 )
 ```
 
-To reproduce the data needed for training run the following commands:
+To reproduce the data needed for training, run the following commands:
 
 ```
 python scripts/download_data.py
@@ -63,22 +63,12 @@ python scripts/extract_embeddings.py
 
 ### Models
 
-* Input: pair of face images
-* Target: same person (1) or different person (0)
+The embeddings are used to train two models:
 
-Two verification approaches are implemented and compared:
+1. **Logistic Regression on Embedding Differences**
+2. **Support Vector Machine**
 
-1. **Cosine Similarity + Threshold (Baseline)**
-
-   * Compute cosine similarity between two embeddings
-   * Predict “same person” if similarity exceeds a tuned threshold
-
-2. **Logistic Regression on Embedding Differences**
-
-   * Feature: absolute difference between two embeddings
-   * Lightweight supervised model trained on LFW pairs
-
-This setup allows comparison between a non-parametric baseline and a trained ML model.
+The models are fine-tuned and both perform equally well.
 
 ---
 

@@ -26,18 +26,23 @@ We use the **Labeled Faces in the Wild (LFW)** dataset:
 
 ***Downloading the dataset***:
 
+Dataset was taken from scikit-learn and then processed to generate matching and non-matching pairs. 
+
 ```
 from sklearn.datasets import fetch_lfw_people
-lfw_people = fetch_lfw_people(min_faces_per_person=70, resize=0.4)
+lfw_people = fetch_lfw_people(
+    min_faces_per_person=70,
+    resize=0.4,
+    data_home="data/raw"
+)
 ```
 
-***Processing the dataset***:
+To reproduce the data needed for training run the following commands:
 
-* Generate pairs of face images
-* Input: pair of face images
-* Target: same person (1) or different person (0)
-
-Instructions to process the dataset are provided in `scripts/process_dataset.py`.
+```
+python scripts/download_data.py
+python scripts/generate_pairs.py
+```
 
 ---
 
@@ -49,6 +54,9 @@ Instructions to process the dataset are provided in `scripts/process_dataset.py`
 * The embedding model is kept **frozen** to keep training fast and reproducible.
 
 ### Models
+
+* Input: pair of face images
+* Target: same person (1) or different person (0)
 
 Two verification approaches are implemented and compared:
 

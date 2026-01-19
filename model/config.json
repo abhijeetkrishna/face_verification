@@ -1,0 +1,11 @@
+{
+  "model": "logistic_regression",
+  "C": 10,
+  "features": [
+    "abs_diff",
+    "prod",
+    "cos_sim",
+    "l2_dist"
+  ],
+  "random_state": 42
+}

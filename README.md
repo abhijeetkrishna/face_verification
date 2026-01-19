@@ -148,7 +148,8 @@ The trained verification model is exposed via a **Flask API**.
 
 ```bash
 python -m venv faceEnv
-source faceEnv/bin/activate
+source faceEnv/bin/activate #Mac
+faceEnv\Scripts\activate #Windows
 pip install -r requirements.txt
 ```
 
@@ -175,7 +176,7 @@ Build and run with Docker:
 
 ```bash
 docker build -t face-verification .
-docker run -p 5000:5000 face-verification
+docker run -p 9696:9696 face-verification
 ```
 
 ---

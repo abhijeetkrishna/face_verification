@@ -1,27 +1,41 @@
 FROM python:3.10-slim
 
-# Avoid Python buffering issues
 ENV PYTHONUNBUFFERED=1
+ENV PYTHONDONTWRITEBYTECODE=1
 
 WORKDIR /app
 
-# System deps (needed for torch / tokenizers)
+# -----------------------
+# System dependencies
+# -----------------------
 RUN apt-get update && apt-get install -y \
     git \
+    libglib2.0-0 \
+    libgl1 \
+    libjpeg62-turbo \
+    libpng16-16 \
     && rm -rf /var/lib/apt/lists/*
 
-# Install Python deps
+# -----------------------
+# Python dependencies
+# -----------------------
 COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Copy application code
-COPY src/predict.py .
+# -----------------------
+# Application code
+# -----------------------
+COPY scripts/predict.py ./predict.py
 
-# Copy model files
+# -----------------------
+# Model artifacts
+# -----------------------
 COPY model/ ./model/
 
-# Expose port
+# -----------------------
+# Expose & run
+# -----------------------
 EXPOSE 9696
 
-# Run with gunicorn (same as before)
-ENTRYPOINT ["gunicorn", "--bind=0.0.0.0:9696", "predict:app"]
+ENTRYPOINT ["gunicorn", "--workers=2", "--threads=2", "--bind=0.0.0.0:9696", "predict:app"]
+

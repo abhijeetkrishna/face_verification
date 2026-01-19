@@ -1,6 +1,6 @@
-facenet-pytorch
-scikit-learn
-pandas
+facenet-pytorch==2.6.0
+scikit-learn==1.8.0
+pandas==2.3.3
 matplotlib
 flask
 gunicorn

@@ -135,6 +135,8 @@ python scripts/predict.py
 }
 ```
 
+Run `scripts/test_app.py` to test the endpoint.
+
 ## Containerization
 
 Build and run with Docker:

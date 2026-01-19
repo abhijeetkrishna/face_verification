@@ -50,8 +50,16 @@ python scripts/generate_pairs.py
 
 ### Embedding Extraction
 
+Simple image comparison will fail for face verification because aspects lighting conditions, expressions, etc can make two images of the same person very different. Extracting embedding using a model like FaceNet will convert our 2D images into a 512-dimensional vector. Each image is now a point in this 512D space. This model is pre-trained to encode the identity of the face in the image. Hence images of the same person in this space will be close together.
+
 * A **pretrained FaceNet model** is used to convert each face image into a fixed-length embedding vector.
 * The embedding model is kept **frozen** to keep training fast and reproducible.
+
+To extract the embedding run the following commands :
+
+```
+python scripts/extract_embeddings.py
+```
 
 ### Models
 

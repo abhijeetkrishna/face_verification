@@ -131,8 +131,8 @@ The trained verification model is exposed via a **Flask API**.
 ### Environment setup
 
 ```bash
-python -m venv venv
-source venv/bin/activate
+python -m venv faceEnv
+source faceEnv/bin/activate
 pip install -r requirements.txt
 ```
 

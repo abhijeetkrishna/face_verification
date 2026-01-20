@@ -1,5 +1,8 @@
 # Face Verification Service
 
+[![Python](https://img.shields.io/badge/python-3.11+-blue)](https://www.python.org/)
+[![License](https://img.shields.io/badge/license-MIT-green)](LICENSE)
+
 <p align="center">
   <img src="assets/main.png" width="70%">
 </p>
@@ -190,3 +193,13 @@ future improvements.
 * Face clustering to automatically build “people” groups
 * Incremental updates as new photos are added
 * Active learning for cluster refinement
+
+## Dataset and Licensing
+
+This project uses the Labeled Faces in the Wild (LFW) dataset for evaluation
+and demonstration purposes.
+
+LFW is provided for non-commercial research and educational use only.
+The dataset itself is not included in this repository.
+
+Users are responsible for complying with the LFW dataset license.

@@ -4,7 +4,7 @@
 [![License](https://img.shields.io/badge/license-MIT-green)](LICENSE)
 
 <p align="center">
-  <img src="assets/main.png" width="70%">
+  <img src="assets/main.png" width="100%">
 </p>
 
 ## Problem Description

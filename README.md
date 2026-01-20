@@ -1,7 +1,7 @@
 # Face Verification Service
 
 <p align="center">
-  <img src="assets/main.png" width="45%">
+  <img src="assets/main.png" width="70%">
 </p>
 
 ## Problem Description
@@ -158,7 +158,11 @@ Run `scripts/demo_app_gradio.py` to start the demo. A link is generated in the t
 
 ### Demo video of app
 
-[![Demo Video](assets/thumbnail.png)](assets/demo.mp4)
+
+
+https://github.com/user-attachments/assets/96b3f9be-dc2d-490b-a71f-0c429c9bc458
+
+
 
 ## Failure Cases
 

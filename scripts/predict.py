@@ -94,6 +94,8 @@ def verify():
         img1 = decode_image(data["image1"])
         img2 = decode_image(data["image2"])
 
+        print("Decoded images:", img1.size, img2.size)
+
         emb1 = extract_embedding(img1)
         emb2 = extract_embedding(img2)
 

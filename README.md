@@ -146,10 +146,14 @@ docker build -t face-verification .
 docker run -p 9696:9696 face-verification
 ```
 
+## Public demo via Gradio share link
+
+A public demo is provided using Gradio, which exposes the locally running verification service via a temporary share link.
+
+Run `scripts/demo_app_gradio.py` to start the demo.
+
 ## Future Work
 
 * Face clustering to automatically build “people” groups
 * Incremental updates as new photos are added
 * Active learning for cluster refinement
-* Cloud deployment and scalable embedding search (FAISS)
-

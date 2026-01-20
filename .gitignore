@@ -2,3 +2,4 @@ faceEnv
 .DS_Store
 data
 playground.ipynb
+.gradio

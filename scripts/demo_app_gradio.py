@@ -38,20 +38,32 @@ def verify_faces(img1, img2):
         return (
             "<div style='text-align:center; "
             "font-size:48px; font-weight:bold; color:green;'>"
-            "SAME PERSON"
+            "✅ SAME PERSON"
             "</div>"
         )
     else:
         return (
             "<div style='text-align:center; "
             "font-size:48px; font-weight:bold; color:red;'>"
-            "DIFFERENT PERSONS"
+            "❌ DIFFERENT PERSONS"
             "</div>"
         )
 
 
 with gr.Blocks() as demo:
-    gr.Markdown("# Face Verification Demo")
+    gr.Markdown(
+        """
+        <h1 style="text-align:center;">
+            Face Verification / Matching Demo
+        </h1>
+        <p style="text-align:center; font-size:16px;">
+            A simple machine learning application that compares two face images.
+            <br>
+            The system computes image embeddings and classifies the pair as
+            <b>same</b> or <b>different</b>.
+        </p>
+        """
+    )
 
     with gr.Row():
         img1 = gr.Image(type="numpy", label="Image 1")
@@ -59,7 +71,6 @@ with gr.Blocks() as demo:
 
     btn = gr.Button("Verify")
 
-    # IMPORTANT: Markdown output, not Textbox
     output = gr.Markdown()
 
     btn.click(

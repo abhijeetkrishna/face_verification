@@ -1,5 +1,9 @@
 # Face Verification Service
 
+<p align="center">
+  <img src="assets/main.png" width="45%">
+</p>
+
 ## Problem Description
 
 Modern photo applications (e.g. Google Photos) automatically group images by person without requiring predefined identities.
@@ -150,10 +154,35 @@ docker run -p 9696:9696 face-verification
 
 A public demo is provided using Gradio, which exposes the locally running verification service via a temporary share link.
 
-Run `scripts/demo_app_gradio.py` to start the demo.
+Run `scripts/demo_app_gradio.py` to start the demo. A link is generated in the terminal. This link can be shared publicly but is only temporarily active.
+
+### Demo video of app
+
+[![Demo Video](assets/thumbnail.png)](assets/demo.mp4)
+
+## Failure Cases
+
+While the model performs well on most examples, it can fail in challenging scenarios.
+Below are two representative failure cases observed during testing.
+
+<p align="center">
+  <img src="assets/damon_wahlberg.png" width="45%">
+</p>
+
+Mark Wahlberg and Matt Damon are cited for looking similar. The model fails in these tricky situations.
+
+<p align="center">
+  <img src="assets/Charles_Bronson_old_young.png" width="45%">
+</p>
+
+The model also fails in this example of identifying the same person at different age
+
+These examples highlight the limitations of the current system and motivate
+future improvements.
 
 ## Future Work
 
+* Allow user to create a gallery
 * Face clustering to automatically build “people” groups
 * Incremental updates as new photos are added
 * Active learning for cluster refinement
